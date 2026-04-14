@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: job-processor
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jobprocessor
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info
+  endpoint:
+    health:
+      show-details: always
+
+app:
+  api-key: ${API_KEY:dev-secret-key}
+  messaging:
+    consumer-enabled: ${APP_MESSAGING_CONSUMER_ENABLED:true}
+  job:
+    max-attempts: 3
+    idempotency-ttl-hours: 24
+    retry-backoff-base-seconds: 5
+  rate-limit:
+    enabled: true
+    requests-per-minute: 100
+  scheduler:
+    enabled: ${APP_SCHEDULER_ENABLED:true}

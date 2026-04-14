@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="job-processor"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app":"${appName}"}</customFields>
+            <includeMdcKeyName>jobId</includeMdcKeyName>
+            <includeMdcKeyName>attempt</includeMdcKeyName>
+            <includeMdcKeyName>workerId</includeMdcKeyName>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="com.lucas.jobprocessor" level="DEBUG"/>
+    <logger name="org.springframework.amqp" level="WARN"/>
+    <logger name="org.hibernate.SQL" level="WARN"/>
+</configuration>

@@ -1,0 +1,41 @@
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+!backend/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Spring Boot
+*.log
+spring-shell.log
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.claude/
+*.swp
+*.swo
+.DS_Store
+
+# Node / Frontend
+node_modules/
+dist/
+.cache/
+*.local
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Docker
+*.override.yml
+
+# OS
+Thumbs.db
